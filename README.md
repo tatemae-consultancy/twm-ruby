@@ -29,15 +29,16 @@ orca_count = twm.hotline.count(species: 'orca')
 => 17179
 
 pages = (orca_count.to_f/1000.to_f).ceil
-=> 18
-
 orca_sightings = []
-
 1.upto(pages) do |page|
   orca_sightings.concat twm.hotline.search(limit: 1000, page: page)
 end
 
-orca_sightings.size
-=> 17829
+orca_sightings.first['id']
+=> "52c4a6da686f741c25000000"
+
+sighting = twm.hotline.find("52c4a6da686f741c25000000")
+sighting['species']
+=> 'orca'
 
 ```
