@@ -37,6 +37,24 @@ module TWM
       @api.get("api/count.json", params)
     end
 
+    # Retrieve a specific sighting report
+    # 
+    # @param [String] id The ID of the sighting report to retrieve.
+    #
+    # @return [JSON] A sighting report object.
+    #
+    # @see http://hotline.whalemuseum.org/api
+    # 
+    # @example
+    #
+    #   sighting = twm.hotline.find('52b158c0686f7438d8ac0600')
+    #   sighting['species']
+    #   => "orca"
+    #
+    def find(id)
+      @api.get("api/#{id.to_s}.json")
+    end
+
     # Retrieve Hotline sighting reports
     # 
     # @param [Hash] params Optional params or filters:
