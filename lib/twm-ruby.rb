@@ -1,8 +1,8 @@
-require 'oauth2'
 require 'multi_json'
 
 require 'twm-ruby/version'
 require 'twm-ruby/errors'
+require 'twm-ruby/api'
 
 module TWM
   class API
@@ -26,23 +26,28 @@ module TWM
     def handle_response(response)
       case response.status
       when 400
-        raise BadRequest.new response.parsed
+        raise BadRequest.new MultiJson.load(response)
       when 401
         raise Unauthorized.new
       when 404
         raise NotFound.new
       when 400...500
-        raise ClientError.new response.parsed
+        raise ClientError.new MultiJson.load(response)
       when 500...600
         raise ServerError.new
       else
+        begin
+          MultiJson.load(response)
+        rescue MultiJson.load(response)
+
+        end
         case response.body
         when ''
           true
         when is_a?(Integer)
           response.body
         else
-          response.parsed
+          MultiJson.load(response)
         end
       end
     end
