@@ -3,7 +3,7 @@ module TWM
   # The Whale Hotline API
   # http://hotline.whalemuseum.org/api
   #
-  class Hotline
+  class Sightings
     attr_accessor :api
 
     def initialize(api)
@@ -28,10 +28,10 @@ module TWM
     # 
     # @example
     #
-    #   count = twm.hotline.count
+    #   count = twm.sightings.count
     #   => 17000
     #
-    #   count = twm.hotline.count(species: 'orca')
+    #   count = twm.sightings.count(species: 'orca')
     #
     def count(params = {})
       @api.get("api/count.json", params)
@@ -47,7 +47,7 @@ module TWM
     # 
     # @example
     #
-    #   sighting = twm.hotline.find('52b158c0686f7438d8ac0600')
+    #   sighting = twm.sightings.find('52b158c0686f7438d8ac0600')
     #   sighting['species']
     #   => "orca"
     #
@@ -74,11 +74,11 @@ module TWM
     # 
     # @example
     #
-    #   sightings = twm.hotline.search
+    #   sightings = twm.sightings.search
     #   sightings.size
     #   => 17000
     #
-    #   sightings = twm.hotline.search(species: 'orca', limit: 250)
+    #   sightings = twm.sightings.search(species: 'orca', limit: 250)
     #
     def search(params = {})
       @api.get("api.json", params)

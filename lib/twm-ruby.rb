@@ -75,8 +75,8 @@ module TWM
     end
 
     # API nodes
-    def hotline # :nodoc:
-      Hotline.new self
+    def sightings # :nodoc:
+      Sightings.new self
     end
 
   end
