@@ -1,10 +1,14 @@
 module TWM
+  #
+  # The Whale Hotline API
+  # http://hotline.whalemuseum.org/api
+  #
   class Hotline
     attr_accessor :api
 
     def initialize(api)
       @api = api
-      @api.session = Faraday.new(url: 'http://hotline.whalemuseum.org')
+      @api.create_session('http://hotline.whalemuseum.org')
     end
 
     # Retrieve Hotline sighting reports
@@ -30,7 +34,7 @@ module TWM
     #   count = twm.hotline.count(species: 'orca')
     #
     def count(params = {})
-      @api.get("api/count.json", params: params)
+      @api.get("api/count.json", params)
     end
 
     # Retrieve Hotline sighting reports
@@ -59,7 +63,7 @@ module TWM
     #   sightings = twm.hotline.search(species: 'orca', limit: 250)
     #
     def search(params = {})
-      @api.get("api.json", params: params)
+      @api.get("api.json", params)
     end
   end
 end
